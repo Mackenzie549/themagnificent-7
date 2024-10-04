@@ -1,39 +1,52 @@
 import "../../App.css";
 import styled from "styled-components";
 import Button from "../../components/atoms/Button";
+import { spacing32 } from "../../theme";
+import RainbowChar from "../atoms/RainbowChar";
 
-const Heading = styled.div`
-  font-size: 64px;
-  font-family: Pacifico;
-  font-weight: 200;
-  color: white;
+const ParentContainer = styled.div`
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  text-shadow: 0.04em 0 black, 0 0.04em black, -0.04em 0 black, 0 -0.04em black;
+  align-items: center;
+  justify-content: center;
 `;
 
-const LargeNumber = styled.div`
-  font-size: 186px;
+const Heading = styled.div`
+  font-size: 72px;
+  font-family: Pacifico;
   font-weight: 200;
-  line-height: 200px;
+  color: lightgrey;
+  display: flex;
+  flex-direction: column;
+  text-shadow: 0.0em 0 black, 0 0.01em black, -0.01em 0 black, 0 -0.04em black;
+`;
+
+const ButtonContainer = styled.div`
+  margin: ${spacing32};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const enterApp = () => {
-    window.location.href = "/team";
+  window.location.href = "/team";
 };
 
 const Home = () => {
   return (
     <div className="App">
-        <header className="App-header">
+      <ParentContainer>
         <Heading>
-            The Magnificent
-            <LargeNumber>7</LargeNumber>
+          The Magnificent
         </Heading>
-        </header>
-        <Button text="Enter" onClick={enterApp}></Button>
+        <RainbowChar>7</RainbowChar>
+        <ButtonContainer>
+          <Button text="Enter" onClick={enterApp}></Button>
+        </ButtonContainer>
+      </ParentContainer>
     </div>
   );
-}
+};
 
 export default Home;

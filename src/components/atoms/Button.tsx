@@ -4,18 +4,24 @@ import { ButtonProps as Props } from "../../types/button";
 
 
 const ButtonContainer = styled.button`
-  background-color: white;
-  height: 36px;
-  width: 100%;
+  height: 100px;
+  width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
-  font-weight: 600;
+  color: grey;
+  font-size: 32px;
+  font-weight: 200;
+  font-family: Pacifico;
   line-height: 32px;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 20px;
   text-align: center;
+  border: 1px solid black;
+  &:hover {
+    color: black;
+    border: 1px solid #de5893;
+  }
 `;
 
 const Button: React.FC<Props> = ({
