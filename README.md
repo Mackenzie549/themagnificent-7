@@ -14,3 +14,6 @@ This currently is hardcoded although available from the API call in the element 
 
 This MVP doesn't account for players tying on the same level of magnificence. Currently it sorts and just takes the top value
 
+
+Error handling works: Testing API at 11:20 and got "Game is updating" error :)
+
