@@ -13,7 +13,7 @@ export const spacing86 = "86px";
 export const maxContainerSize = "1128px";
 
 // Breakpoints
-export const mobileBreakpoint = "900px";
+export const mobileBreakpoint = "600px";
 
 // Colors
 export const themePink = "#f94594"

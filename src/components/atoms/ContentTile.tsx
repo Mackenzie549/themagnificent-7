@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ContentTileProps as Props } from "../../types/contentTile";
+import { mobileBreakpoint } from "../../theme";
 
 const ContentTileContainer = styled.div`
   display: flex;
@@ -10,6 +11,10 @@ const ContentTileContainer = styled.div`
   border-radius: 5px;
   width: 880px;
   height: 80vh;
+  @media only screen and (max-width: ${mobileBreakpoint}) {
+    width: 90vw;
+    height: 100%;
+  }
 `;
 
 const ContentTile: React.FC<Props> = ({children}) => {

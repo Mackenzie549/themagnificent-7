@@ -1,7 +1,7 @@
 import "../../App.css";
 import styled from "styled-components";
 import Button from "../../components/atoms/Button";
-import { spacing32, themePink } from "../../theme";
+import { mobileBreakpoint, spacing32, themePink } from "../../theme";
 import RainbowChar from "../atoms/RainbowChar";
 
 const ParentContainer = styled.div`
@@ -20,6 +20,9 @@ const Heading = styled.div`
   display: flex;
   flex-direction: column;
   text-shadow: 0.0em 0 black, 0 0.01em black, -0.01em 0 black, 0 -0.04em black;
+  @media only screen and (max-width: ${mobileBreakpoint}) {
+    font-size: 48px;
+  }
 `;
 
 const ButtonContainer = styled.div`
