@@ -1,10 +1,13 @@
 import "../../App.css";
 import styled from "styled-components";
 import ContentTile from "../atoms/ContentTile";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import RainbowChar from "../atoms/RainbowChar";
-import { spacing8 } from "../../theme";
-import PlayerDetails from "../molecules/PlayerDetails";
+import { spacing24, spacing8 } from "../../theme";
+import PlayerPosition from "../molecules/PlayerPosition";
+import { categorisePlayersByPosition } from "../../utils/playerUtils";
+import { fetchTeamData } from "../../services/api";
+import Heading from "../atoms/Heading";
 
 const ParentContainer = styled.div`
   height: 100vh;
@@ -12,6 +15,7 @@ const ParentContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: ${spacing24};
 `;
 
 const ContentContainer = styled.div`
@@ -34,97 +38,57 @@ const PlayerFormation = styled.div`
   gap: ${spacing8};
   height: 100%;
   width: 100%;
-`;
-
-const PlayerPosition = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-`;
-
-const Square = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: black;
+  background-color: #5fa941;
 `;
 
 const TeamView = () => {
+  const [teams, setTeams] = useState<any[]>([]);
+  const [players, setPlayers] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const maxNumOfGk = 1;
   const maxNumOfDef = 2;
   const maxNumOfMid = 3;
   const maxNumOfFor = 1;
-  const [teams, setTeams] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [magnificenceGK, setMagnificenceGK] = useState<any[]>([]);
-  const [magnificenceDef, setMagnificenceDef] = useState<any[]>([]);
-  const [magnificenceMid, setMagnificenceMid] = useState<any[]>([]);
-  const [magnificenceFor, setMagnificenceFor] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getData = async () => {
+      setIsLoading(true);
       try {
-        const response = await fetch(
-          "https://cors-proxy-90954623675.europe-west1.run.app/"
-        );
-        const result = await response.json();
+        const result = await fetchTeamData();
         setTeams(result.teams);
-
-        const gkArray: any[] = [];
-        const defArray: any[] = [];
-        const midArray: any[] = [];
-        const fwdArray: any[] = [];
-
-        console.log(result.elements);
-
-        result.elements.forEach((player: any) => {
-          switch (player.element_type) {
-            case 1:
-              gkArray.push(player);
-              break;
-            case 2:
-              defArray.push(player);
-              break;
-            case 3:
-              midArray.push(player);
-              break;
-            case 4:
-              fwdArray.push(player);
-              break;
-            default:
-              break;
-          }
-        });
-
-        const sortedGK = gkArray.sort(
-          (a, b) => b.goals_scored + b.assists - (a.goals_scored + a.assists)
-        );
-        const sortedDef = defArray.sort(
-          (a, b) => b.goals_scored + b.assists - (a.goals_scored + a.assists)
-        );
-        const sortedMid = midArray.sort(
-          (a, b) => b.goals_scored + b.assists - (a.goals_scored + a.assists)
-        );
-        const sortedFor = fwdArray.sort(
-          (a, b) => b.goals_scored + b.assists - (a.goals_scored + a.assists)
-        );
-
-        setMagnificenceGK(sortedGK.slice(0, maxNumOfGk));
-        setMagnificenceDef(sortedDef.slice(0, maxNumOfDef));
-        setMagnificenceMid(sortedMid.slice(0, maxNumOfMid));
-        setMagnificenceFor(sortedFor.slice(0, maxNumOfFor));
+        setPlayers(result.elements);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching team data", error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    setIsLoading(true);
-    fetchData();
+    getData();
   }, []);
+
+  const teamsById = useMemo(() => {
+    const map: Record<number, string> = {};
+    teams.forEach((team) => {
+      map[team.id] = team.name;
+    });
+    return map;
+  }, [teams]);
+
+  const { goalkeepers, defenders, midfielders, forwards } = useMemo(() => {
+    const limits = {
+      goalkeepers: maxNumOfGk,
+      defenders: maxNumOfDef,
+      midfielders: maxNumOfMid,
+      forwards: maxNumOfFor,
+    };
+    return categorisePlayersByPosition(players, limits);
+  }, [players, maxNumOfGk, maxNumOfDef, maxNumOfMid, maxNumOfFor]);
+
   return (
     <ParentContainer>
+      <Heading>The Magnificent 7</Heading>
       <ContentTile>
         <ContentContainer>
           {isLoading ? (
@@ -134,26 +98,10 @@ const TeamView = () => {
             </>
           ) : (
             <PlayerFormation>
-              <PlayerPosition>
-                <PlayerDetails
-                  name={"Joe Bloggs"}
-                  position={"GK"}
-                  team={"Man City"}
-                  magnificence={1}
-                />
-              </PlayerPosition>
-              <PlayerPosition>
-                <Square />
-                <Square />
-              </PlayerPosition>
-              <PlayerPosition>
-                <Square />
-                <Square />
-                <Square />
-              </PlayerPosition>
-              <PlayerPosition>
-                <Square />
-              </PlayerPosition>
+              <PlayerPosition players={goalkeepers} teamsById={teamsById} />
+              <PlayerPosition players={defenders} teamsById={teamsById} />
+              <PlayerPosition players={midfielders} teamsById={teamsById} />
+              <PlayerPosition players={forwards} teamsById={teamsById} />
             </PlayerFormation>
           )}
         </ContentContainer>

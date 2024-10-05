@@ -5,7 +5,7 @@ import { ContentTileProps as Props } from "../../types/contentTile";
 const ContentTileContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background: white;
+  background-color: white;
   border: 2px solid grey;
   border-radius: 5px;
   width: 880px;

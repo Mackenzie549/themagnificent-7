@@ -14,3 +14,6 @@ export const maxContainerSize = "1128px";
 
 // Breakpoints
 export const mobileBreakpoint = "900px";
+
+// Colors
+export const themePink = "#f94594"

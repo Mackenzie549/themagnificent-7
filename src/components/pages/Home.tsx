@@ -1,7 +1,7 @@
 import "../../App.css";
 import styled from "styled-components";
 import Button from "../../components/atoms/Button";
-import { spacing32 } from "../../theme";
+import { spacing32, themePink } from "../../theme";
 import RainbowChar from "../atoms/RainbowChar";
 
 const ParentContainer = styled.div`
@@ -16,7 +16,7 @@ const Heading = styled.div`
   font-size: 72px;
   font-family: Pacifico;
   font-weight: 200;
-  color: lightgrey;
+  color: ${themePink};
   display: flex;
   flex-direction: column;
   text-shadow: 0.0em 0 black, 0 0.01em black, -0.01em 0 black, 0 -0.04em black;

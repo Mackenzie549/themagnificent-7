@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ButtonProps as Props } from "../../types/button";
+import { spacing32, themePink } from "../../theme";
 
 
 const ButtonContainer = styled.button`
@@ -13,14 +14,14 @@ const ButtonContainer = styled.button`
   font-size: 32px;
   font-weight: 200;
   font-family: Pacifico;
-  line-height: 32px;
+  line-height: ${spacing32};
   cursor: pointer;
   border-radius: 20px;
   text-align: center;
   border: 1px solid black;
   &:hover {
     color: black;
-    border: 1px solid #de5893;
+    border: 1px solid ${themePink};
   }
 `;
 
