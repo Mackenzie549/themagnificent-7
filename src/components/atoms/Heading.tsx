@@ -11,17 +11,15 @@ const HeadingText = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  text-shadow: 0.0em 0 black, 0 0.01em black, -0.01em 0 black, 0 -0.04em black;
+  text-shadow: 0em 0 black, 0 0.01em black, -0.01em 0 black, 0 -0.04em black;
   @media only screen and (max-width: ${mobileBreakpoint}) {
     font-size: 36px;
     margin-top: ${spacing32};
   }
 `;
 
-const Heading: React.FC<Props> = ({children}) => {
-  return (
-    <HeadingText>{children}</HeadingText>
-  );
+const Heading: React.FC<Props> = ({ children }) => {
+  return <HeadingText>{children}</HeadingText>;
 };
 
 export default Heading;

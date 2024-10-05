@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { ButtonProps as Props } from "../../types/button";
 import { spacing32, themePink } from "../../theme";
 
-
 const ButtonContainer = styled.button`
   height: 100px;
   width: 300px;
@@ -25,15 +24,8 @@ const ButtonContainer = styled.button`
   }
 `;
 
-const Button: React.FC<Props> = ({
-  text,
-  onClick
-}) => {
-  return (
-    <ButtonContainer onClick={onClick}>
-      {text}
-    </ButtonContainer>
-  );
+const Button: React.FC<Props> = ({ text, onClick }) => {
+  return <ButtonContainer onClick={onClick}>{text}</ButtonContainer>;
 };
 
 export default Button;

@@ -1,3 +1,3 @@
 export type RainbowCharProps = {
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 };

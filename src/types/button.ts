@@ -1,4 +1,4 @@
 export type ButtonProps = {
-    text: string;
-    onClick: (e: any) => void;
+  text: string;
+  onClick: (e: any) => void;
 };

@@ -1,3 +1,3 @@
 export type ContentTileProps = {
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 };

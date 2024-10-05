@@ -11,10 +11,7 @@ const PlayerContainer = styled.div`
   width: 100%;
 `;
 
-const PlayerPosition: React.FC<Props> = ({
-  players,
-  teamsById,
-}) => {
+const PlayerPosition: React.FC<Props> = ({ players, teamsById }) => {
   return (
     <PlayerContainer>
       {players.map((player, index) => (
