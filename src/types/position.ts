@@ -4,7 +4,7 @@ export type Position = {
   short_name: string;
 };
 
-export const element_type: any  = {
+export const element_type: Record<number, string>  = {
   1: "Goalkeeper",
   2: "Defence",
   3: "Midfield",
