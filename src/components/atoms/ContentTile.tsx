@@ -10,10 +10,9 @@ const ContentTileContainer = styled.div`
   border: 2px solid grey;
   border-radius: 5px;
   width: 880px;
-  height: 80vh;
+  height: 100%;
   @media only screen and (max-width: ${mobileBreakpoint}) {
-    width: 90vw;
-    height: 100%;
+    width: 90vw; 
   }
 `;
 
